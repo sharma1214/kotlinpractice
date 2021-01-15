@@ -33,9 +33,13 @@ fun main(){
     // another way of passing lambda as a param for addition of two number
     obj.addNumber(4,5,{ a,b ->a+b})
     //or if lambda is a last param of function then we can write lambda outside of parenthesis
-    obj.addNumber(4,5) { a, b -> a + b }
+    obj.addNumber(4,5) { x, y -> x + y } // we can give any param name instead of a and b like x and y
     //or we can pass normal function also as a param
     obj.addNumber(4,5,::sum)
+
+    //obj.square(25,{ a -> a*a.toLong()})
+    //obj.square(25) { a -> a * a.toLong() }
+    obj.square(25){ it*it.toLong() } // Converting Int to Long
 }
 
 fun sum(a:Int,b:Int):Int{
@@ -57,6 +61,11 @@ class LambdaExample {
     fun addNumber(a:Int,b:Int,fn:(Int,Int)->Int){
         val sum = fn(a,b)
         println("Add number from lambda function is $sum")
+    }
+
+    // lambda takes one param
+    fun square(a:Int,fn:(Int)->Long){
+        fn(a)
     }
 }
 
